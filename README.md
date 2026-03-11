@@ -2,7 +2,6 @@
 
 This is the repository for the **Avnzor Test** project, built with the CodeIgniter 4 framework.
 
----
 
 ## Getting Started
 
@@ -22,14 +21,15 @@ composer install
 ```bash
 cp env .env
 ```
+### 4. Create 'purchase' named database
 
-### 4. Database Migrations and Seeders
+### 5. Database Migrations and Seeders
 ```bash
 php spark migrate
-php spark db:seed
+php spark db:seed ProductSeeder
 ```
 
-### 5. Run the Project
+### 6. Run the Project
 ```bash
 php spark serve
 ```
