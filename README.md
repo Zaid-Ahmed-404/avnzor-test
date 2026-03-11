@@ -35,3 +35,6 @@ php spark serve
 ```
 
 The application will be accessible at: http://localhost:8080
+
+
+https://github.com/user-attachments/assets/4cb0618e-b325-4b2b-917a-f618c4156d3e
