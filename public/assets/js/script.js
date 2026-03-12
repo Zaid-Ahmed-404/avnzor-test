@@ -1,13 +1,9 @@
-/**
- * Global variable assumed to be provided by your backend/database
- * var productsFromDB = [...]; 
- */
+
 
 function addRow(savedData = null) {
     const tbody = document.getElementById('itemRows');
     const row = document.createElement('tr');
 
-    // Generate product options
     const optionsHtml = productsFromDB.map(product => {
         const isSelected = (savedData && savedData.id == product.id) ? 'selected' : '';
         return `
@@ -47,7 +43,6 @@ function addRow(savedData = null) {
 
     tbody.appendChild(row);
 
-    // If loading saved data, trigger the change logic to populate VAT/Totals
     if (savedData) {
         const select = row.querySelector('.product-select');
         handleProductChange(select, false);
@@ -59,8 +54,7 @@ function handleProductChange(select, shouldSave = true) {
     const option = select.options[select.selectedIndex];
 
     if (option && option.value) {
-        // Only overwrite the cost if this is a manual user change (shouldSave = true)
-        // or if we are initializing a fresh row.
+
         if (shouldSave) {
             row.querySelector('.cost-input').value = option.dataset.cost;
         }
@@ -69,7 +63,7 @@ function handleProductChange(select, shouldSave = true) {
         const vatPer = isVat ? option.dataset.vatPer : 0;
         row.querySelector('.vat-percent-text').innerText = vatPer + '%';
     } else {
-        // Reset row if "Choose..." is selected
+
         row.querySelector('.cost-input').value = 0;
         row.querySelector('.vat-percent-text').innerText = '0%';
     }
@@ -95,7 +89,6 @@ function calculateTotals(shouldSave = true) {
         const cost = parseFloat(row.querySelector('.cost-input').value) || 0;
         const quantity = parseFloat(row.querySelector('.quantity-input').value) || 0;
 
-        // Determine VAT rate from the selected option's data attributes
         let vatRate = 0;
         if (option && option.value && option.dataset.vatApp == '1') {
             vatRate = parseFloat(option.dataset.vatPer) || 0;
@@ -105,7 +98,7 @@ function calculateTotals(shouldSave = true) {
         const vatAmount = subtotal * (vatRate / 100);
         const lineTotal = subtotal + vatAmount;
 
-        // Update Row-specific UI
+
         row.querySelector('.vat-percent-text').innerText = vatRate + '%';
         row.querySelector('.vat-amount-text').innerText = 'SAR ' + vatAmount.toFixed(2);
         row.querySelector('.line-total').innerText = 'SAR ' + lineTotal.toFixed(2);
@@ -114,7 +107,7 @@ function calculateTotals(shouldSave = true) {
         totalVat += vatAmount;
     });
 
-    // Update Footer Totals
+
     document.getElementById('displayNet').innerText = 'SAR ' + net.toFixed(2);
     document.getElementById('displayVat').innerText = 'SAR ' + totalVat.toFixed(2);
     document.getElementById('displayGrand').innerText = 'SAR ' + (net + totalVat).toFixed(2);
@@ -151,7 +144,6 @@ function clearDraft() {
     location.reload();
 }
 
-// Initialization on Page Load
 window.addEventListener('load', () => {
     const savedJson = localStorage.getItem('draft_purchase');
 
@@ -181,7 +173,7 @@ window.addEventListener('load', () => {
     }
 });
 
-// Clear storage when the form is successfully submitted
+
 const purchaseForm = document.getElementById('purchaseForm');
 if (purchaseForm) {
     purchaseForm.onsubmit = () => {

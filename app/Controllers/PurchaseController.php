@@ -29,9 +29,6 @@ class PurchaseController extends BaseController
 
     }
 
-
-    // since the scope of this test is too small. I am creating this in controller.
-    //  if this was a larger project than this function must be present in service
     public function formatDataForStorage($input)
     {
         $productIds = $input['product_id'];
@@ -75,8 +72,6 @@ class PurchaseController extends BaseController
         ];
     }
 
-    // since the scope of this test is too small. I am creating this in controller.
-    //  if this was a larger project than this function must be present in Repository
     public function getProductByIds($productIds)
     {
         $db = Database::connect();
@@ -97,8 +92,6 @@ class PurchaseController extends BaseController
 
     }
 
-    // since the scope of this test is too small. I am creating this in controller.
-    //  if this was a larger project than this function must be present in Repository
     public function createPurchase($purchaseData, $purchaseItemsData)
     {
         $db = Database::connect();
